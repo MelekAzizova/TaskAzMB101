@@ -1,15 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using WebApplication2.Contexts;
 using WebApplication2.Models;
+
 
 namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
         
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            using (PustokDbContex context = new())
+            {
+              var sliders = await context.Sliders.ToListAsync();
+
+            return View(sliders);
+            }
+           
+
+          
+
+
+
+            
+            
         }
 
         
